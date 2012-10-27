@@ -6,8 +6,8 @@ XML mapping tutorial is not a general-purpose XML mapping tutorial (!). It's aim
 4 maven based projects
 * a parent pom project ( xml-mapping-tutorial )
 * jar projects:
-  ** an xml to java mapping service ( mapping-service )
-  ** domain ( basic application domain in Java )
+** an xml to java mapping service ( mapping-service )
+** domain ( basic application domain in Java )
 * a war project: sample webapp exposing a webservice and nothing else, the mapping is delegated to the mapping-service project
 
 # Status
@@ -16,3 +16,4 @@ It works and fills its goal. Nevertheless, many things may be improved (see TODO
 # TODO
 A *LOT* of stuffs !
 * clean the POMs (version numbers in parent)
+* mvn tomcat/jetty plugin
