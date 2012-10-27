@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.teamtter.tutorial.xmlmapping</groupId>
+		<artifactId>xml-mapping-tutorial</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<name>Maps XML docs to Java objects</name>
+	<artifactId>mapping-service</artifactId>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<!-- Jaxb generation : les fichiers générés Java semblent différent de ceux générés par CXF :/ -->
+		<!-- <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
+			<executions> <execution> <goals> <goal>xjc</goal> </goals> </execution> </executions> <configuration> 
+			<schemaDirectory>src/main/resources/wsdl/injector/v5_1</schemaDirectory> <clearOutputDir>false</clearOutputDir> 
+			<nv>true</nv> <bindingDirectory>src/main/resources/wsdl/commons/</bindingDirectory> <bindingFiles>binding-commons.xml</bindingFiles> 
+			</configuration> </plugin> </plugins> </build> -->
+
+		<!-- Remarrque: le plugin 'cxf-codegen-plugin' nécessite un wsdl (même basique) alors que l'on en a 
+			clairement pas l'interet ici. On peut peut etre se contenter d'utiliser "CXF XJC Maven Plugin" qui fait 
+			sans doutes le minimum (XSD => Java) -->
+		<plugins>
+
+			<!-- mapping xsd to java -->
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-xjc-plugin</artifactId>
+
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>xsdtojava</goal>
+						</goals>
+
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+							<xsdOptions>
+								<!-- Order V1 -->
+								<xsdOption>
+									<xsd>${basedir}/src/main/resources/xsd/types/v1/orderType.xsd</xsd>
+									<extension>true</extension>
+									<bindingFile>${basedir}/src/main/resources/xsd/commons/binding-commons.xml</bindingFile>
+								</xsdOption>
+							</xsdOptions>
+						</configuration>
+
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- F***g Eclipse does not add the generated-sources folder as source folder... -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/target/generated-sources/cxf</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on 
+					the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.cxf
+										</groupId>
+										<artifactId>
+											cxf-xjc-plugin
+										</artifactId>
+										<versionRange>
+											[2.6.0,)
+										</versionRange>
+										<goals>
+											<goal>xsdtojava</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.teamtter.tutorial.xmlmapping</groupId>	
+			<artifactId>domain</artifactId>
+		</dependency>
+
+		<!-- Spring Dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+		<!-- END OF Spring Dependencies -->
+
+		<!-- ooooooooooooooooooooooooooooooo -->
+		<!-- oooooooo CXF Plugins oooooooooo -->
+
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf.xjcplugins</groupId>
+			<artifactId>cxf-xjc-boolean</artifactId>
+		</dependency>
+		<dependency> <!-- pour générer les toString des objets générés -->
+			<groupId>org.apache.cxf.xjcplugins</groupId>
+			<artifactId>cxf-xjc-ts</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-common</artifactId>
+		</dependency>
+
+		<!-- oooooooooooooooooooooooooooooooooo -->
+		<!-- oooooooo 3rd party libs oooooooooo -->
+
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+	</dependencies>
+
+
+
+
+</project>

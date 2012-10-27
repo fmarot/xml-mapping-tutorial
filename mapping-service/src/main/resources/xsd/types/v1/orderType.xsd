@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" jaxb:version="2.0"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.teamtter.com/tutorial/xmlmapping/xsd/order/v1"
+	targetNamespace="http://www.teamtter.com/tutorial/xmlmapping/xsd/order/v1">
+
+
+	<xsd:element name="orderWrapper">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="order" type="tns:orderType"
+					minOccurs="1" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="orderType">
+		<xsd:sequence>
+			<xsd:element name="orderNumber" type="xsd:string"
+				minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

@@ -1,0 +1,5 @@
+<order:orderWrapper xmlns:order="http://www.teamtter.com/tutorial/xmlmapping/xsd/order/v1">
+	<order:order>
+		<order:orderNumber>TOTO</order:orderNumber>
+	</order:order>
+</order:orderWrapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.teamtter.tutorial.xmlmapping</groupId>
+		<artifactId>xml-mapping-tutorial</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+
+	<name>Sample webservice using external mapping (XML --> Java) service</name>
+	<artifactId>sample-webservice</artifactId>
+	<packaging>war</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.teamtter.tutorial.xmlmapping</groupId>
+			<artifactId>mapping-service</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+
+
+		<!-- CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<!-- 2.2.x where x in the 0-7 range or 2.3-SNAPSHOT -->
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf.xjc-utils</groupId>
+			<artifactId>cxf-xjc-runtime</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-sources Web Services CXF</id>
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+							<wsdlOptions>
+
+								<!-- Order Injector V1 -->
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/injector/v1/orderInjectorService.wsdl</wsdl>
+<!-- 									<bindingFiles> -->
+<!-- 										<bindingFile>${basedir}/src/main/resources/wsdl/commons/binding-commons.xml</bindingFile> -->
+<!-- 									</bindingFiles> -->
+									<extraargs>
+										<extraarg>-xjc-Xbg</extraarg>
+										<extraarg>-quiet</extraarg>
+										<extraarg>-keep</extraarg>
+										<!-- where to find the XSD -->
+										<extraarg>-catalog</extraarg>
+										<extraarg>${basedir}/src/main/resources/wsdl/injector/catalog/catalog.xml</extraarg>
+										<!-- do not generate the java code for the following namespaces 
+											because it is generated in another project -->
+										<extraarg> -nexclude</extraarg>
+										<extraarg>http://www.teamtter.com/tutorial/xmlmapping/xsd/order/v1</extraarg>
+										<!--
+ 										<extraarg> -nexclude</extraarg>
+ 										<extraarg>http://www.teamtter.com/tutorial/xmlmapping/xsd/orderMiscSubComponent/v1</extraarg>
+ 										-->
+										
+									</extraargs>
+								</wsdlOption>
+
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.cxf.xjcplugins</groupId>
+						<artifactId>cxf-xjc-boolean</artifactId>
+						<version>2.3.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<properties>
+	</properties>
+</project>

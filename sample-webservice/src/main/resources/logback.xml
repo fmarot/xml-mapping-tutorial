@@ -1,0 +1,6 @@
+<configuration scan="true" scanPeriod="30 seconds">
+    <contextName>sample-webservice</contextName>
+    
+    
+    <root level="DEBUG"/>
+</configuration>

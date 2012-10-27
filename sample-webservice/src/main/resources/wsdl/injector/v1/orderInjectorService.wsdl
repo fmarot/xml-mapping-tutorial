@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                        xmlns:commons="http://www.teamtter.com/tutorial/xmlmapping/xsd/commons/v1"
+                  xmlns:orderInjector="http://www.teamtter.com/tutorial/xmlmapping/ws/orderInjector/v1"
+                            xmlns:tns="http://www.teamtter.com/tutorial/xmlmapping/ws/orderInjector/v1"
+                  targetNamespace="http://www.teamtter.com/tutorial/xmlmapping/ws/orderInjector/v1"
+                  name="orderInjectorV1">
+	
+	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified" 
+                    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd">
+                    
+			<xsd:import namespace="http://www.teamtter.com/tutorial/xmlmapping/ws/orderInjector/v1" 
+				schemaLocation="orderInjectorService.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="injectOrderRequestMsg">
+        <wsdl:part name="injectOrderResquest" element="orderInjector:injectOrderRequest" />
+    </wsdl:message>
+    <wsdl:message name="injectOrderResponseMsg">
+        <wsdl:part name="injectOrderResponse" element="orderInjector:injectOrderResponse" />
+    </wsdl:message>
+    <wsdl:message name="orderInjectorFaultMsg">
+        <wsdl:part name="fault" element="orderInjector:faultInfo" />
+    </wsdl:message>
+    
+    <wsdl:portType name="orderInjectorPortType">
+        <wsdl:operation name="injectOrder">
+            <wsdl:documentation>
+                Inject an new or existing Order in the system
+            </wsdl:documentation>
+            <wsdl:input message="tns:injectOrderRequestMsg" />
+            <wsdl:output message="tns:injectOrderResponseMsg" />
+            <wsdl:fault name="orderInjectorFault" message="tns:orderInjectorFaultMsg" />
+        </wsdl:operation>
+    </wsdl:portType>
+	
+	<wsdl:binding name="orderInjectorBinding" type="tns:orderInjectorPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="injectOrder">
+            <soap:operation soapAction="urn:tutorial/xmlmapping/ws/orderInjector/v1" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+            <wsdl:fault name="orderInjectorFault">
+                <soap:fault name="orderInjectorFault" use="literal" />
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    
+    <wsdl:service name="orderInjectorService">
+        <wsdl:port binding="tns:orderInjectorBinding" name="orderInjectorPort">
+            <soap:address location="http://www.example.org/" />
+        </wsdl:port>
+    </wsdl:service>
+	
+</wsdl:definitions>

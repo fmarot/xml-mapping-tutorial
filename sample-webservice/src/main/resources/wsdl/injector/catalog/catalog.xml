@@ -1,0 +1,16 @@
+<!DOCTYPE catalog
+ PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN"
+ "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog"
+         prefer="public">
+
+	<!-- as the XSD is in another project, tells to find it on the classpath -->
+	<rewriteSystem
+	        systemIdStartString="xsd/types/v1/orderType.xsd"
+	        rewritePrefix="classpath:xsd/types/v1/orderType.xsd" />
+
+<!-- 	<rewriteSystem -->
+<!-- 	        systemIdStartString="wsdl/injector/v2/orderType.xsd" -->
+<!-- 	        rewritePrefix="classpath:wsdl/injector/v2/orderType.xsd" /> -->
+
+</catalog>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:order="http://www.teamtter.com/tutorial/xmlmapping/xsd/order/v1"
+	targetNamespace="http://www.teamtter.com/tutorial/xmlmapping/ws/orderInjector/v1"
+	xmlns:tns="http://www.teamtter.com/tutorial/xmlmapping/ws/orderInjector/v1">
+
+	<xsd:import namespace="http://www.teamtter.com/tutorial/xmlmapping/xsd/order/v1"
+		schemaLocation="xsd/types/v1/orderType.xsd" />
+
+	<xsd:element name="injectOrderRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="order" type="order:orderType" minOccurs="1" maxOccurs="1" />
+				<!-- <xsd:element ref="order:ecomOrder" /> -->
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="injectOrderResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="orderNumber" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="faultInfo" type="tns:faultInfoType" />
+
+	<xsd:complexType name="faultInfoType">
+		<xsd:sequence>
+			<xsd:element name="code" type="xsd:string" />
+			<xsd:element name="description" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

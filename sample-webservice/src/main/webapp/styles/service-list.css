@@ -1,0 +1,46 @@
+
+
+.heading {
+	font-size: 33px;
+	font-weight: bold;
+	background-image : url(../images/bird.png);
+	background-repeat: no-repeat;
+	padding-left: 150px;
+}
+
+.field {
+	font-weight: bold;
+}
+
+.value {
+	font-weight: normal;
+}
+
+.porttypename {
+	font-weight: bold;
+}
+
+UL {
+	margin-top: 0;
+	margin-bottom: 3px;
+	list-style-type: square;
+}
+
+LI {
+	font-weight: normal;
+}
+
+TABLE {
+	border: solid;
+	border-color: grey;
+	border-collapse: collapse;
+	border-width: 2px;
+}
+
+TD {
+	border: solid;
+	border-color: grey;
+	border-width: 1px;
+	vertical-align: text-top;
+	padding: 5px;
+}

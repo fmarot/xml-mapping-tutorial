@@ -1,0 +1,220 @@
+<?xml version="1.0" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<name>XMLMapping tutorial root</name>
+	<groupId>com.teamtter.tutorial.xmlmapping</groupId>
+	<artifactId>xml-mapping-tutorial</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>domain</module>
+		<module>mapping-service</module>
+		<module>sample-webservice</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Maven plugins versions -->
+		<cxf.version>2.6.0</cxf.version>
+		<cxf.plugin.version>${cxf.version}</cxf.plugin.version>
+		<maven.javadoc.plugin.version>2.8</maven.javadoc.plugin.version>
+		<maven.jaxb.plugin.version>1.1.1</maven.jaxb.plugin.version>
+		<xml.maven.plugin.version>1.0</xml.maven.plugin.version>
+		<!-- Libs versions -->
+		<lombok.version>0.11.4</lombok.version>
+		<slf4j.version>1.7.2</slf4j.version>
+		<logback.version>1.0.7</logback.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
+
+		<guava.version>12.0</guava.version>
+		<dozer.version>5.3.2</dozer.version>
+	</properties>
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<!-- <version>2.3.2</version> -->
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<!-- <dependency> -->
+			<!-- <groupId>com.teamtter.tutorial.xmlmapping</groupId> -->
+			<!-- <artifactId>domain</artifactId> -->
+			<!-- <version>${project.version}</version> -->
+			<!-- </dependency> -->
+
+			<dependency>
+				<groupId>com.teamtter.tutorial.xmlmapping</groupId>
+				<artifactId>mapping-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.teamtter.tutorial.xmlmapping</groupId>
+				<artifactId>domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- ************** -->
+			<!-- 3rd party libs -->
+			<!-- ************** -->
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sf.dozer</groupId>
+				<artifactId>dozer</artifactId>
+				<version>${dozer.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxws</artifactId>
+				<version>${cxf.plugin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf.xjcplugins</groupId>
+				<artifactId>cxf-xjc-boolean</artifactId>
+				<version>${cxf.plugin.version}</version>
+			</dependency>
+			<dependency> <!-- pour générer les toString des objets générés -->
+				<groupId>org.apache.cxf.xjcplugins</groupId>
+				<artifactId>cxf-xjc-ts</artifactId>
+				<version>${cxf.plugin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.plugin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-tools-common</artifactId>
+				<version>${cxf.plugin.version}</version>
+			</dependency>
+
+			<!-- ******************* -->
+			<!-- Spring Dependencies -->
+			<!-- ******************* -->
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- END OF Spring Dependencies -->
+
+
+			<!-- Tests dependencies -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.8.2</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+
+	</dependencies>
+
+</project>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xsi:schemaLocation="
+                       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+                       http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+                       ">
+
+	<context:annotation-config />
+
+	<bean id="orderInjectorServiceV1"
+		class="com.teamtter.ws.orderinjector.v1.OrderInjectorService_V1" />
+
+	<jaxws:endpoint id="orderInjectorEndpointV1" implementor="#orderInjectorServiceV1"
+		address="/orderInjector/1">
+		<jaxws:properties>
+			<entry key="schema-validation-enabled" value="true" />
+		</jaxws:properties>
+		<jaxws:inInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+		</jaxws:inInterceptors>
+		<jaxws:outInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+		</jaxws:outInterceptors>
+		<jaxws:inFaultInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingInInterceptor" />
+		</jaxws:inFaultInterceptors>
+		<jaxws:outFaultInterceptors>
+			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
+		</jaxws:outFaultInterceptors>
+	</jaxws:endpoint>
+
+</beans>
