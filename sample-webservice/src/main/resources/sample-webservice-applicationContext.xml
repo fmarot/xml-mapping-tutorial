@@ -16,8 +16,7 @@
 	<bean id="orderInjectorServiceV1"
 		class="com.teamtter.ws.orderinjector.v1.OrderInjectorService_V1" />
 
-	<jaxws:endpoint id="orderInjectorEndpointV1" implementor="#orderInjectorServiceV1"
-		address="/orderInjector/1">
+	<jaxws:endpoint id="orderInjectorEndpointV1" implementor="#orderInjectorServiceV1" address="/orderInjector/1">
 		<jaxws:properties>
 			<entry key="schema-validation-enabled" value="true" />
 		</jaxws:properties>

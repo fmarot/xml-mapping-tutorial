@@ -19,6 +19,7 @@ public class OrderInjectorService_V1 implements OrderInjectorPortType {
 	public InjectOrderResponse injectOrder(InjectOrderRequest injectOrderResquest) throws OrderInjectorFaultMsg {
 		InjectOrderResponse response = new InjectOrderResponse();
 		try {
+			log.info("Will map order V1");
 			// Mapping de la commande
 			OrderType xmlOrder = injectOrderResquest.getOrder();
 			Order order = ordermapper.convertToJavaOrder(xmlOrder);

@@ -20,16 +20,6 @@
 			</resource>
 		</resources>
 
-		<!-- Jaxb generation : les fichiers générés Java semblent différent de ceux générés par CXF :/ -->
-		<!-- <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
-			<executions> <execution> <goals> <goal>xjc</goal> </goals> </execution> </executions> <configuration> 
-			<schemaDirectory>src/main/resources/wsdl/injector/v5_1</schemaDirectory> <clearOutputDir>false</clearOutputDir> 
-			<nv>true</nv> <bindingDirectory>src/main/resources/wsdl/commons/</bindingDirectory> <bindingFiles>binding-commons.xml</bindingFiles> 
-			</configuration> </plugin> </plugins> </build> -->
-
-		<!-- Remarrque: le plugin 'cxf-codegen-plugin' nécessite un wsdl (même basique) alors que l'on en a 
-			clairement pas l'interet ici. On peut peut etre se contenter d'utiliser "CXF XJC Maven Plugin" qui fait 
-			sans doutes le minimum (XSD => Java) -->
 		<plugins>
 
 			<!-- mapping xsd to java -->
@@ -65,7 +55,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.5</version>
 				<executions>
 					<execution>
 						<id>add-source</id>
@@ -129,43 +118,40 @@
 		</dependency>
 
 		<!-- Spring Dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-core</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-expression</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-context</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework</groupId> -->
+<!-- 			<artifactId>spring-context-support</artifactId> -->
+<!-- 		</dependency> -->
 		<!-- END OF Spring Dependencies -->
 
 		<!-- ooooooooooooooooooooooooooooooo -->
 		<!-- oooooooo CXF Plugins oooooooooo -->
 
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf.xjcplugins</groupId>
-			<artifactId>cxf-xjc-boolean</artifactId>
-		</dependency>
-		<dependency> <!-- pour générer les toString des objets générés -->
-			<groupId>org.apache.cxf.xjcplugins</groupId>
-			<artifactId>cxf-xjc-ts</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf</groupId> -->
+<!-- 			<artifactId>cxf-rt-frontend-jaxws</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.apache.cxf.xjcplugins</groupId> -->
+<!-- 			<artifactId>cxf-xjc-boolean</artifactId> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+			<!-- pour générer les toString des objets générés -->
+<!-- 			<groupId>org.apache.cxf.xjcplugins</groupId> -->
+<!-- 			<artifactId>cxf-xjc-ts</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-tools-common</artifactId>
@@ -173,15 +159,19 @@
 
 		<!-- oooooooooooooooooooooooooooooooooo -->
 		<!-- oooooooo 3rd party libs oooooooooo -->
-
+		
+		<!-- ***** -->
+		<!-- Tests -->
+		<!-- ***** -->
 		<dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<scope>test</scope>			
 		</dependency>
 
 	</dependencies>

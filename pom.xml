@@ -17,21 +17,31 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+		<java.source.version>1.7</java.source.version>
+		<java.target.version>1.7</java.target.version>
 		<!-- Maven plugins versions -->
 		<cxf.version>2.6.0</cxf.version>
-		<cxf.plugin.version>${cxf.version}</cxf.plugin.version>
+		<cxf.codegen.plugin.version>2.7.0</cxf.codegen.plugin.version>
+		<cxf.xjc.plugin.version>2.6.0</cxf.xjc.plugin.version>
+		<cxf.other.version>2.7.0</cxf.other.version>
 		<maven.javadoc.plugin.version>2.8</maven.javadoc.plugin.version>
+
 		<maven.jaxb.plugin.version>1.1.1</maven.jaxb.plugin.version>
 		<xml.maven.plugin.version>1.0</xml.maven.plugin.version>
+		<maven.compiler.plugin.version>2.3.2</maven.compiler.plugin.version>
+		<maven.buildhelper.plugin.version>1.5</maven.buildhelper.plugin.version>
 		<!-- Libs versions -->
+		<jaxb.version>2.2.7</jaxb.version>
 		<lombok.version>0.11.4</lombok.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<logback.version>1.0.7</logback.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
 
-		<guava.version>12.0</guava.version>
+		<guava.version>13.0.1</guava.version>
 		<dozer.version>5.3.2</dozer.version>
+		<junit.version>4.10</junit.version>
+		<!-- Eclipse specific (beuuaaarrkk...) -->
+		<eclipse.m2.lifecyclemapping>1.0.0</eclipse.m2.lifecyclemapping>
 	</properties>
 
 
@@ -41,31 +51,43 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<!-- <version>2.3.2</version> -->
+					<version>${maven.compiler.plugin.version}</version>
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
+						<source>${java.source.version}</source>
+						<target>${java.target.version}</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${maven.buildhelper.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-xjc-plugin</artifactId>
+					<version>${cxf.xjc.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-codegen-plugin</artifactId>
+					<version>${cxf.codegen.plugin.version}</version>
+				</plugin>
+
 			</plugins>
+
+
+
 		</pluginManagement>
 	</build>
 
 	<dependencyManagement>
 		<dependencies>
 
-			<!-- <dependency> -->
-			<!-- <groupId>com.teamtter.tutorial.xmlmapping</groupId> -->
-			<!-- <artifactId>domain</artifactId> -->
-			<!-- <version>${project.version}</version> -->
-			<!-- </dependency> -->
-
 			<dependency>
 				<groupId>com.teamtter.tutorial.xmlmapping</groupId>
 				<artifactId>mapping-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 
 			<dependency>
 				<groupId>com.teamtter.tutorial.xmlmapping</groupId>
@@ -78,8 +100,19 @@
 			<!-- ************** -->
 
 			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>${jaxb.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
 				<version>${logback.version}</version>
 			</dependency>
 
@@ -87,6 +120,7 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 			<dependency>
@@ -100,6 +134,30 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+			<dependency>
+				<!-- Empty commons-logging, redirected to SLF4J thanks to "jcl-over-slf4j" -->
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>99-empty</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>runtime</scope>
+			</dependency>
 
 			<dependency>
 				<groupId>net.sf.dozer</groupId>
@@ -110,27 +168,33 @@
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxws</artifactId>
-				<version>${cxf.plugin.version}</version>
+				<version>${cxf.other.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.cxf.xjcplugins</groupId>
-				<artifactId>cxf-xjc-boolean</artifactId>
-				<version>${cxf.plugin.version}</version>
+				<!-- JAX-RS annotations -->
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+				<version>${cxf.other.version}</version>
 			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>org.apache.cxf.xjcplugins</groupId> -->
+			<!-- <artifactId>cxf-xjc-boolean</artifactId> -->
+			<!-- <version>${cxf.version}</version> -->
+			<!-- </dependency> -->
 			<dependency> <!-- pour générer les toString des objets générés -->
 				<groupId>org.apache.cxf.xjcplugins</groupId>
 				<artifactId>cxf-xjc-ts</artifactId>
-				<version>${cxf.plugin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>${cxf.plugin.version}</version>
+				<version>${cxf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-tools-common</artifactId>
-				<version>${cxf.plugin.version}</version>
+				<version>${cxf.other.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf.xjc-utils</groupId>
+				<artifactId>cxf-xjc-runtime</artifactId>
+				<version>${cxf.version}</version>
 			</dependency>
 
 			<!-- ******************* -->
@@ -190,7 +254,7 @@
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>4.8.2</version>
+				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -199,22 +263,21 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
-
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>version99</id>
+			<url>http://version99.qos.ch/</url>
+		</repository>
+	</repositories>
 
 </project>
