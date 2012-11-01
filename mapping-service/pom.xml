@@ -51,7 +51,7 @@
 				</executions>
 			</plugin>
 
-			<!-- F***g Eclipse does not add the generated-sources folder as source folder... -->
+			<!-- F***g M2E/Eclipse does not add the generated-sources folder as source folder... -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
@@ -117,49 +117,16 @@
 			<artifactId>domain</artifactId>
 		</dependency>
 
-		<!-- Spring Dependencies -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-core</artifactId> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-context</artifactId> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework</groupId> -->
-<!-- 			<artifactId>spring-context-support</artifactId> -->
-<!-- 		</dependency> -->
-		<!-- END OF Spring Dependencies -->
-
-		<!-- ooooooooooooooooooooooooooooooo -->
-		<!-- oooooooo CXF Plugins oooooooooo -->
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.cxf</groupId> -->
-<!-- 			<artifactId>cxf-rt-frontend-jaxws</artifactId> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.apache.cxf.xjcplugins</groupId> -->
-<!-- 			<artifactId>cxf-xjc-boolean</artifactId> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-			<!-- pour générer les toString des objets générés -->
-<!-- 			<groupId>org.apache.cxf.xjcplugins</groupId> -->
-<!-- 			<artifactId>cxf-xjc-ts</artifactId> -->
-<!-- 		</dependency> -->
+		
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-tools-common</artifactId>
 		</dependency>
 
-		<!-- oooooooooooooooooooooooooooooooooo -->
-		<!-- oooooooo 3rd party libs oooooooooo -->
-		
 		<!-- ***** -->
 		<!-- Tests -->
 		<!-- ***** -->
@@ -175,8 +142,5 @@
 		</dependency>
 
 	</dependencies>
-
-
-
 
 </project>
