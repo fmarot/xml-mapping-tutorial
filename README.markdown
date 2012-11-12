@@ -1,3 +1,5 @@
+[![Build Status](http://teamtter.com:8081/job/xml-mapping-tutorial/badge/icon)](http://teamtter.com:8081/job/xml-mapping-tutorial/)
+
 For a more complete description, see the complete tutorial in [the Github wiki](https://github.com/fmarot/xml-mapping-tutorial/wiki)
 
 # What is XML-mapping-tutorial ? 
